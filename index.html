@@ -1,0 +1,746 @@
+<!DOCTYPE HTML>
+<!--
+	Szkoła Rocka — strona fundacji, v3
+	Zbudowana na bazie szablonu Spectral by HTML5 UP (html5up.net/spectral,
+	licencja CCA 3.0 — patrz LICENSE.txt). Paleta kolorów, fonty i wszystkie
+	style main.css SĄ ORYGINALNYM, NIEZMIENIONYM Spectralem — assets/css/custom.css
+	dokłada WYŁĄCZNIE layout (grid/flex) dla sekcji, których Spectral nie ma
+	domyślnie (galeria, kadra, FAQ, lokalizacje, wideo). Zero własnej
+	marki/koloru/typografii nałożonej na szablon.
+
+	JEDYNY świadomy wyjątek od "main.css niezmieniony" (audyt SEO/wydajność,
+	2026-09-02): w linii 2 main.css dopisany parametr "&display=swap" do
+	@importu Google Fonts (Open Sans) — bez tego tekst jest niewidoczny
+	(FOIT) do czasu ściągnięcia fontu, co pogarsza CLS/postrzeganą
+	wydajność. Zero zmian w kolorach/layoutcie/strukturze, tylko ten jeden
+	parametr techniczny.
+
+	v3 — zmiany na życzenie klienta po przeglądzie v2:
+	- hero skrócony, kod QR większy i bardziej wyeksponowany;
+	- sekcja Kadra przeniesiona zaraz po hero (wcześniej: samodzielne wideo);
+	- WSZYSTKIE filmy (hero, Koncert Finałowy, "zagrali u nas", lekcje) są
+	  teraz w jednej sekcji #wideo zamiast rozrzucone w 3 różnych miejscach;
+	- usunięty samodzielny box z pojedynczym wideo pod hero (był źródłem
+	  błędu renderowania — pół czarnej, pustej przestrzeni obok filmu).
+
+	v4 — poprawki wg listy klienta (2026-09-01):
+	- usunięty kod QR z hero (klient doda docelowy kod później, razem
+	  z dedykowaną sekcją zapisu przez QR — na razie nic o tym na stronie);
+	- Koncert Finałowy przestał być głównym "hakiem" marketingowym: zniknął
+	  z hero, paska statystyk i jako samodzielna sekcja z galerią — w jego
+	  miejscu nowa sekcja "Sale prób i wyposażenie" (prawdziwe zdjęcia sal:
+	  gitary, wzmacniacze, perkusja, keyboardy, mikrofony);
+	- nowy akcent w hero/lokalizacjach: zajęcia są NA TERENIE szkoły, w
+	  grafiku dopasowanym do planu lekcji — zero dojazdu;
+	- rozszerzona sekcja "o nas" (uzależnienia/wyobcowanie, projekty
+	  ministerialne, „Grajmy w Szkole”) i "Instrumenty" (ukulele,
+	  instrumenty perkusyjne);
+	- FAQ: dodana odpowiedź o sprzęcie na miejscu (potwierdzone zdjęciami
+	  sal prób — jest własny sprzęt, nie trzeba mieć swojego instrumentu);
+	- nowa sekcja "Polecają nas" — 3 publiczne rolki z Facebooka (Muniek
+	  Staszczyk/T.Love, Tituc/Acid Drinkers, Ewa Farna), embed przez
+	  facebook.com/plugins/video.php (bez SDK, sam iframe).
+
+	Pełny brief i lista rzeczy do potwierdzenia przez fundację:
+	patrz KONTEKST.md w tym samym folderze.
+-->
+<html lang="pl">
+	<head>
+		<meta charset="utf-8" />
+		<title>Szkoła Rocka — zajęcia muzyczne dla dzieci i młodzieży | Warszawa</title>
+		<meta name="description" content="Ucz się grać w prawdziwym zespole rockowym. Wokal, gitara, bas, perkusja, klawisze. 3 lokalizacje w Warszawie, nabór cały rok. Zapisz się!" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="canonical" href="https://szkolarocka.pl/" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Szkoła Rocka" />
+		<meta property="og:title" content="Szkoła Rocka — zajęcia muzyczne dla dzieci i młodzieży | Warszawa" />
+		<meta property="og:description" content="Ucz się grać w prawdziwym zespole rockowym. Wokal, gitara, bas, perkusja, klawisze. 3 lokalizacje w Warszawie, nabór cały rok." />
+		<meta property="og:url" content="https://szkolarocka.pl/" />
+		<meta property="og:locale" content="pl_PL" />
+		<meta property="og:image" content="https://szkolarocka.pl/images/hero-koncert.jpg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
+		<!-- Twitter/X Card — czyta te same dane co Open Graph -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Szkoła Rocka — zajęcia muzyczne dla dzieci i młodzieży | Warszawa" />
+		<meta name="twitter:description" content="Ucz się grać w prawdziwym zespole rockowym. Wokal, gitara, bas, perkusja, klawisze. 3 lokalizacje w Warszawie, nabór cały rok." />
+		<meta name="twitter:image" content="https://szkolarocka.pl/images/hero-koncert.jpg" />
+
+		<!-- preconnect: Open Sans jest ładowany przez @import w main.css (oryginalny,
+		     niezmieniony Spectral — patrz nota u góry pliku) — to samo w sobie wciąż
+		     blokuje renderowanie, ale preconnect przynajmniej skraca czas nawiązania
+		     połączenia zanim przeglądarka dotrze do tego @importu. -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/custom.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png" />
+		<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "EducationalOrganization",
+			"name": "Fundacja Promocji Kultury \"Szkoła Rocka\"",
+			"alternateName": "Szkoła Rocka",
+			"url": "https://szkolarocka.pl/",
+			"logo": "https://szkolarocka.pl/images/logo.png",
+			"email": "fundacja@szkolarocka.pl",
+			"telephone": "+48694559479",
+			"foundingDate": "2011",
+			"address": {
+				"@type": "PostalAddress",
+				"streetAddress": "ul. Mydlarska 15A lok. 25",
+				"postalCode": "04-690",
+				"addressLocality": "Warszawa",
+				"addressCountry": "PL"
+			},
+			"sameAs": [
+				"https://facebook.com/szkolarocka.waw",
+				"https://www.instagram.com/szkolarocka/",
+				"https://youtube.com/@SzkoaRocka"
+			],
+			"identifier": [
+				{ "@type": "PropertyValue", "name": "KRS", "value": "0000599376" },
+				{ "@type": "PropertyValue", "name": "NIP", "value": "9522142850" },
+				{ "@type": "PropertyValue", "name": "REGON", "value": "363662599" }
+			]
+		}
+		<!-- foundingDate=2011 przyjęte wg maila założyciela (start działalności
+		     przy Fort Sokolnickiego); 2016 to wyłącznie rok rejestracji fundacji
+		     w KRS, nie mieszać tych dwóch dat — patrz KONTEKST.md pkt 1. -->
+		</script>
+
+		<!-- FAQPage — treść 1:1 skopiowana z widocznej sekcji #faq. Jeśli zmienisz
+		     pytanie/odpowiedź w #faq, zaktualizuj też ten blok, żeby nie rozjechały
+		     się z tym, co faktycznie widać na stronie (Google to sprawdza). -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "FAQPage",
+			"mainEntity": [
+				{
+					"@type": "Question",
+					"name": "Dla kogo są zajęcia?",
+					"acceptedAnswer": {
+						"@type": "Answer",
+						"text": "Dla dzieci w wieku szkolnym i starszej młodzieży. Przyjmujemy zarówno początkujących, jak i osoby już grające lub śpiewające — spora część naszych wychowanków to dziś studenci, którzy zaczynali jeszcze jako gimnazjaliści."
+					}
+				},
+				{
+					"@type": "Question",
+					"name": "Nie umiem grać — mogę dołączyć?",
+					"acceptedAnswer": {
+						"@type": "Answer",
+						"text": "Tak! Większość naszych uczestników zaczynała od zera. Instrument wybierasz na miejscu i uczysz się od pierwszych zajęć — w zespole."
+					}
+				},
+				{
+					"@type": "Question",
+					"name": "Ile kosztują zajęcia?",
+					"acceptedAnswer": {
+						"@type": "Answer",
+						"text": "Szkoła Rocka to fundacja, nie prywatna szkoła — udział w zajęciach jest darowizną na cele statutowe. Dla młodszych uczestników to 180 zł/mc (1 godzina tygodniowo), dla starszych 250 zł/mc (2 godziny tygodniowo plus dodatkowe warsztaty na wybranym instrumencie)."
+					}
+				},
+				{
+					"@type": "Question",
+					"name": "Czy mogę dołączyć w trakcie roku szkolnego?",
+					"acceptedAnswer": {
+						"@type": "Answer",
+						"text": "Tak. Nowe zajęcia startują co roku 1 września, ale nabór trwa cały rok i dołączenie w trakcie roku jest możliwe."
+					}
+				},
+				{
+					"@type": "Question",
+					"name": "Gdzie odbywają się zajęcia?",
+					"acceptedAnswer": {
+						"@type": "Answer",
+						"text": "W trzech lokalizacjach w Warszawie: SP nr 373 (ul. Angorska 2), SP nr 402 (ul. Jana Nowaka-Jeziorańskiego 22) i SP nr 375 (ul. Abrahama 10) — na terenie szkoły, w grafiku dopasowanym do planu lekcji. Szczegóły w sekcji Lokalizacje powyżej."
+					}
+				},
+				{
+					"@type": "Question",
+					"name": "Czy muszę mieć własny instrument?",
+					"acceptedAnswer": {
+						"@type": "Answer",
+						"text": "Nie musisz. Na miejscu mamy własny sprzęt: gitary elektryczne, akustyczne i basowe, ukulele, dwa zestawy perkusyjne, instrumenty klawiszowe, wzmacniacze i mikrofony — zobacz zdjęcia w sekcji Sale prób powyżej. Jeśli masz już swój instrument, oczywiście możesz go przynosić."
+					}
+				},
+				{
+					"@type": "Question",
+					"name": "Jak wyglądają zapisy?",
+					"acceptedAnswer": {
+						"@type": "Answer",
+						"text": "Wypełnij formularz poniżej, napisz na fundacja@szkolarocka.pl albo zadzwoń pod +48 694 559 479 — oddzwonimy i dopasujemy Cię do zespołu."
+					}
+				}
+			]
+		}
+		</script>
+	</head>
+	<body class="landing is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="#page-wrapper"><img src="images/logo.png" alt="Szkoła Rocka" class="site-logo" /></a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="#kadra">Kadra</a></li>
+											<li><a href="#polecaja">Polecają nas</a></li>
+											<li><a href="#jak-to-dziala">Jak to działa</a></li>
+											<li><a href="#instrumenty">Instrumenty</a></li>
+											<li><a href="#sale-prob">Sale prób</a></li>
+											<li><a href="#wideo">Wideo</a></li>
+											<li><a href="#lokalizacje">Lokalizacje</a></li>
+											<li><a href="#o-nas">O nas</a></li>
+											<li><a href="#faq">FAQ</a></li>
+											<li><a href="#zapisy">Zapisz się</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<p class="hero-kicker">Fundacja Promocji Kultury „Szkoła Rocka”</p>
+							<h2>Załóż swój pierwszy zespół — na terenie własnej szkoły.</h2>
+							<p class="lead">Zajęcia muzyczne dla dzieci i młodzieży w Warszawie, w grafiku dopasowanym do planu lekcji — grasz w zespole od pierwszego dnia, bez dodatkowego dojazdu.</p>
+							<ul class="actions special">
+								<li><a href="#zapisy" class="button primary">Zapisz się na zajęcia</a></li>
+								<li><a href="#wideo" class="button">Zobacz, jak gramy</a></li>
+							</ul>
+							<p class="badge-line">Działamy od 2011 roku · 3 lokalizacje w Warszawie · 500+ młodych muzyków</p>
+						</div>
+						<!-- QR ZAPISY: usunięty na życzenie klienta (2026-09-01) — docelowy kod QR
+						     i sekcja "zapisz się przez QR" wrócą później, gdy klient dostarczy
+						     finalny kod. Pliki images/qr-zapisy.svg / .png zostają w repo, nieużywane. -->
+						<a href="#one" class="more scrolly">Zobacz więcej</a>
+					</section>
+
+				<!-- One: szybkie statystyki -->
+					<section id="one" class="wrapper style1 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Kilkanaście lat, setki młodych muzyków</h2>
+								<p>Nie ćwiczysz sam w pokoju. Od pierwszych zajęć jesteś częścią zespołu — na miejscu,<br />
+								w Twojej szkole, bez dodatkowego dojazdu.</p>
+							</header>
+							<ul class="icons major stat-list">
+								<li>
+									<span class="icon solid fa-calendar-alt major style1"><span class="label">Lata działalności</span></span>
+									<span class="stat-number">15 lat doświadczenia</span>
+								</li>
+								<li>
+									<span class="icon solid fa-users major style2"><span class="label">Uczestnicy</span></span>
+									<span class="stat-number">500+ uczestników</span>
+								</li>
+								<li>
+									<span class="icon solid fa-map-marker-alt major style3"><span class="label">Lokalizacje</span></span>
+									<span class="stat-number">3 lokalizacje w Warszawie</span>
+								</li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Kadra (przeniesiona na górę strony, zaraz po hero) -->
+					<section id="kadra" class="wrapper style2 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Naszą kadrę tworzy zespół młodych ludzi</h2>
+								<p>Z szerokim doświadczeniem muzycznym, a także scenicznym. Fundacja Szkoła Rocka dba o to, jak najlepiej<br />
+								przekazać wiedzę i umiejętności młodym ludziom, tworząc własną metodykę i rozwijając kompetencje pedagogiczne już od 15 lat.</p>
+							</header>
+							<div class="crew-grid">
+								<div class="crew-card">
+									<div class="crew-avatar"><img src="images/kadra-arkadiusz.jpg" alt="Arkadiusz Krupa"  loading="lazy" /></div>
+									<h3>Arkadiusz Krupa</h3>
+									<p>Założyciel i koordynator — skrzypek, multiinstrumentalista</p>
+								</div>
+								<div class="crew-card">
+									<div class="crew-avatar"><img src="images/kadra-izzy.jpg" alt="Maciej „Izzy” Izdebski"  loading="lazy" /></div>
+									<h3>Maciej „Izzy” Izdebski</h3>
+									<p>Instruktor Szkoły Rocka</p>
+								</div>
+								<div class="crew-card">
+									<div class="crew-avatar"><img src="images/kadra-malina.jpg" alt="Krzysztof „Malina” Malinowski"  loading="lazy" /></div>
+									<h3>Krzysztof „Malina” Malinowski</h3>
+									<p>Instruktor Szkoły Rocka</p>
+								</div>
+								<div class="crew-card">
+									<div class="crew-avatar"><img src="images/kadra-wiktoria.jpg" alt="Wiktoria Drozd"  loading="lazy" /></div>
+									<h3>Wiktoria Drozd</h3>
+									<p>Instruktorka Szkoły Rocka</p>
+								</div>
+								<div class="crew-card">
+									<div class="crew-avatar"><img src="images/kadra-szymon.jpg" alt="Szymon Ogonowski"  loading="lazy" /></div>
+									<h3>Szymon Ogonowski</h3>
+									<p>Instruktor Szkoły Rocka</p>
+								</div>
+							</div>
+							<!-- DO POTWIERDZENIA: instrument/specjalizacja + 1 zdanie doświadczenia
+							     dla Izzy'ego, Maliny, Wiktorii i Szymona — nie zostały podane, nie
+							     zmyślać. -->
+						</div>
+					</section>
+
+				<!-- Polecają nas: rolki z Facebooka. Fasada klik-do-odtworzenia (jak YouTube
+				     niżej) zamiast iframe od razu — Facebook potrafi pokazać pustą/martwą
+				     ramkę zalogowanym-wymagającym widzom, więc dopóki nie klikniesz, widać
+				     tylko miniaturkę + czytelne imię i nazwisko NAD filmem, plus zawsze
+				     widoczny link "Zobacz na Facebooku" jako zapasowa ścieżka, gdyby embed
+				     się nie załadował. Miniaturki (2026-09-01) to prawdziwe zdjęcia od
+				     klienta z folderu foto_polecenie/ — nie wygenerowane/pobrane kadry.
+				     Linki do rolek dostarczone przez klienta 2026-09-01. -->
+					<section id="polecaja" class="wrapper style3 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Polecają nas</h2>
+								<p>Znani muzycy, którzy zagrali gościnnie u nas albo osobiście przesłali<br />
+								pozdrowienia dla Szkoły Rocka.</p>
+							</header>
+							<div class="recommend-grid">
+								<figure class="fb-card">
+									<h3 class="fb-card__name">Muniek Staszczyk <span>— T.Love</span></h3>
+									<div class="fb-wrap fb" data-href="https://www.facebook.com/watch/?mibextid=wwXIfr&amp;v=1925366891099680&amp;rdid=teunMDXfgGg8eVLn" data-title="Muniek Staszczyk (T.Love) poleca Szkołę Rocka">
+										<button type="button" class="fb-face" aria-label="Odtwórz: Muniek Staszczyk (T.Love) poleca Szkołę Rocka">
+											<img src="images/polecaja-muniek.jpg" alt="" loading="lazy" />
+											<span class="play" aria-hidden="true"></span>
+										</button>
+									</div>
+									<a class="fb-card__out" href="https://www.facebook.com/watch/?mibextid=wwXIfr&amp;v=1925366891099680&amp;rdid=teunMDXfgGg8eVLn" target="_blank" rel="noopener">Zobacz na Facebooku ↗ <span class="sr-only">(otwiera się w nowej karcie)</span></a>
+								</figure>
+								<figure class="fb-card">
+									<h3 class="fb-card__name">Tomasz „Titus” Pukacki <span>— Acid Drinkers</span></h3>
+									<div class="fb-wrap fb" data-href="https://www.facebook.com/watch/?mibextid=wwXIfr&amp;v=2124772180893500&amp;rdid=OSWNJJsIWEd14di1" data-title="Tomasz „Titus” Pukacki (Acid Drinkers) poleca Szkołę Rocka">
+										<button type="button" class="fb-face" aria-label="Odtwórz: Tomasz Titus Pukacki (Acid Drinkers) poleca Szkołę Rocka">
+											<img src="images/polecaja-titus.jpg" alt="" loading="lazy" />
+											<span class="play" aria-hidden="true"></span>
+										</button>
+									</div>
+									<a class="fb-card__out" href="https://www.facebook.com/watch/?mibextid=wwXIfr&amp;v=2124772180893500&amp;rdid=OSWNJJsIWEd14di1" target="_blank" rel="noopener">Zobacz na Facebooku ↗ <span class="sr-only">(otwiera się w nowej karcie)</span></a>
+								</figure>
+								<figure class="fb-card">
+									<h3 class="fb-card__name">Ewa Farna</h3>
+									<div class="fb-wrap fb" data-href="https://www.facebook.com/watch/?mibextid=wwXIfr&amp;v=1141164386034371&amp;rdid=i5Dp9RkKVsI3sYaP" data-title="Ewa Farna poleca Szkołę Rocka">
+										<button type="button" class="fb-face" aria-label="Odtwórz: Ewa Farna poleca Szkołę Rocka">
+											<img src="images/polecaja-farna.jpg" alt="" loading="lazy" />
+											<span class="play" aria-hidden="true"></span>
+										</button>
+									</div>
+									<a class="fb-card__out" href="https://www.facebook.com/watch/?mibextid=wwXIfr&amp;v=1141164386034371&amp;rdid=i5Dp9RkKVsI3sYaP" target="_blank" rel="noopener">Zobacz na Facebooku ↗ <span class="sr-only">(otwiera się w nowej karcie)</span></a>
+								</figure>
+							</div>
+							<!-- DO POTWIERDZENIA: link do rolki Ewy Farny wcześniej nie oddawał
+							     żadnych metadanych przy próbie pobrania podglądu bez logowania (w
+							     odróżnieniu od pozostałych dwóch) — to wygląda na węższe udostępnienie
+							     niż "Publiczne". Miniaturka teraz jest już prawdziwym zdjęciem od
+							     klienta, ale sam odtwarzacz FB po kliknięciu może nadal nie zadziałać
+							     u gościa strony, jeśli widoczność posta nie jest ustawiona na
+							     Publiczne — sprawdźcie to w ustawieniach tego posta na Facebooku. -->
+						</div>
+					</section>
+
+				<!-- Jak to działa (spotlight) -->
+					<section id="jak-to-dziala" class="wrapper alt style2">
+						<header class="major inner">
+							<h2>Od pierwszej próby do sceny w ok. 3 miesiące</h2>
+						</header>
+						<section class="spotlight">
+							<div class="image"><img src="images/jak-to-dziala-1.jpg" alt="Instruktorka pomaga uczestnikowi zajęć przy pierwszej grze na keyboardzie"  loading="lazy" /></div>
+							<div class="content">
+								<h3>1 — Wybierasz instrument</h3>
+								<p>Wokal, gitara, bas, perkusja lub klawisze. Nie musisz umieć grać — nauczymy Cię od zera. Możesz też spróbować kilku instrumentów, zanim wybierzesz swój.</p>
+							</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><img src="images/jak-to-dziala-2.jpg" alt="Instruktor prowadzi grupę dzieci grających razem na instrumentach perkusyjnych"  loading="lazy" /></div>
+							<div class="content">
+								<h3>2 — Dołączasz do zespołu</h3>
+								<p>Gramy w 4–5-osobowych składach, jak prawdziwa kapela. Zajęcia prowadzą doświadczeni muzycy.</p>
+							</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><img src="images/jak-to-dziala-3.jpg" alt="Zespół Szkoły Rocka podczas występu na scenie z widownią"  loading="lazy" /></div>
+							<div class="content">
+								<h3>3 — Wybieracie repertuar</h3>
+								<p>Razem z zespołem decydujecie, co gracie. Rock, pop, wasze ulubione kawałki.</p>
+							</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><img src="images/jak-to-dziala-4.jpg" alt="Uczestnicy Szkoły Rocka na scenie podczas występu, prowadzący w cylindrze żegna się z publicznością"  loading="lazy" /></div>
+							<div class="content">
+								<h3>4 — Wychodzicie na scenę</h3>
+								<p>Po ok. 3 miesiącach wasz zespół ma swój występ przed prawdziwą publicznością. Prawdziwa scena, prawdziwy dźwięk, prawdziwe emocje.</p>
+							</div>
+						</section>
+					</section>
+
+				<!-- Instrumenty (features grid) -->
+					<section id="instrumenty" class="wrapper style3 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Wybierz swój instrument</h2>
+								<p>Każdy zespół to komplet ról — wokal, dwie gitary, bas, perkusja, czasem klawisze. A poza tym: ukulele,<br />
+								instrumenty perkusyjne i wiele, wiele innych. Zaczynasz od zera albo rozwijasz to, co już umiesz.</p>
+							</header>
+							<ul class="features">
+								<li class="icon solid fa-microphone-alt">
+									<h3>Wokal</h3>
+									<p>Emisja głosu, praca z mikrofonem, prezencja sceniczna.</p>
+								</li>
+								<li class="icon solid fa-guitar">
+									<h3>Gitara elektryczna</h3>
+									<p>Riffy, akordy, solówki. Od pierwszych dźwięków do pierwszego występu.</p>
+								</li>
+								<li class="icon solid fa-wave-square">
+									<h3>Gitara basowa</h3>
+									<p>Fundament każdego zespołu. Groove i współpraca z perkusją.</p>
+								</li>
+								<li class="icon solid fa-drum">
+									<h3>Perkusja</h3>
+									<p>Rytm, energia, koordynacja. Serce kapeli.</p>
+								</li>
+								<li class="icon solid fa-keyboard">
+									<h3>Instrumenty klawiszowe</h3>
+									<p>Od klasyki po syntezatory.</p>
+								</li>
+								<li class="icon solid fa-music">
+									<h3>Ukulele</h3>
+									<p>Mały format, szybkie pierwsze efekty. Świetny start przed gitarą.</p>
+								</li>
+								<li class="icon solid fa-drum-steelpan">
+									<h3>Instrumenty perkusyjne</h3>
+									<p>Cajon, congi i inne — rytm poza klasycznym zestawem perkusyjnym.</p>
+								</li>
+							</ul>
+							<!-- Sekcja rozszerzona o ukulele i instrumenty perkusyjne (zdjęcia sprzętu
+							     z folderu sr2, dołożone 2026-09-01) — na miejscu jest ich jeszcze
+							     więcej, patrz galeria "Sale prób i wyposażenie" poniżej. -->
+						</div>
+					</section>
+
+				<!-- Sale prób i wyposażenie: zdjęcia (zastąpiły sekcję "Koncert Finałowy",
+				     usuniętą na życzenie klienta 2026-09-01 — koncert nie ma już być głównym
+				     hakiem marketingowym). Zdjęcia pochodzą z folderu sr2/ (wrzucony przez
+				     klienta), przeskalowane i skompresowane do images/sala-prob-*.jpg. -->
+					<section id="sale-prob" class="wrapper style2 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Nasze sale prób</h2>
+								<p>Prawdziwy sprzęt na miejscu — gitary elektryczne, akustyczne i basowe, ukulele,<br />
+								dwa zestawy perkusyjne, instrumenty klawiszowe, wzmacniacze Marshall, mikrofony studyjne i słuchawki.</p>
+							</header>
+							<div class="gallery-grid">
+								<img src="images/sala-prob-1.jpg" alt="Zestaw instrumentów klawiszowych i syntezatorów w sali prób" loading="lazy" />
+								<img src="images/sala-prob-2.jpg" alt="Mikrofon studyjny ze słuchawkami na statywie w sali prób" loading="lazy" />
+								<img src="images/sala-prob-3.jpg" alt="Dwa zestawy perkusyjne i cajon ustawione obok siebie w sali prób" loading="lazy" />
+								<img src="images/sala-prob-4.jpg" alt="Gitary elektryczne, akustyczne i ukulele ułożone w gwiazdę na podłodze" loading="lazy" />
+								<img src="images/sala-prob-5.jpg" alt="Rząd gitar elektrycznych i basowych oparty o wzmacniacze Marshall" loading="lazy" />
+								<img src="images/sala-prob-6.jpg" alt="Czerwona gitara elektryczna na tle wzmacniaczy w sali prób" loading="lazy" />
+							</div>
+						</div>
+					</section>
+
+				<!-- Wideo: WSZYSTKIE filmy w jednym miejscu (hero, koncert, zagrali u nas, lekcje) -->
+					<section id="wideo" class="wrapper style2 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Zobacz, jak gramy</h2>
+								<p>Nagrania z Koncertów Finałowych, zespoły które zagrały u nas gościnnie i darmowe<br />
+								lekcje instruktażowe nagrane we współpracy z Narodowym Instytutem Audiowizualnym.</p>
+							</header>
+							<div class="video-grid">
+								<figure class="yt-wrap">
+									<div class="yt" data-id="luYgAOy6IXw" data-title="Bo w Szkole Rocka… — zobacz, jak u nas jest"></div>
+									<figcaption>Bo w Szkole Rocka… — zobacz, jak u nas jest</figcaption>
+								</figure>
+								<figure class="yt-wrap">
+									<div class="yt" data-id="E7OAoPrJ4Uc" data-title="XIV Koncert Finałowy Fundacji Szkoła Rocka"></div>
+									<figcaption>XIV Koncert Finałowy Fundacji Szkoła Rocka</figcaption>
+								</figure>
+								<figure class="yt-wrap">
+									<div class="yt" data-id="GwUKQYbPync" data-title="Dark Hoodies i Muniek Staszczyk — IV Liceum (T.Love)"></div>
+									<figcaption>Zagrali u nas: Dark Hoodies i Muniek Staszczyk — IV Liceum (T.Love)</figcaption>
+								</figure>
+								<figure class="yt-wrap">
+									<div class="yt" data-id="n8CMVpFlSOQ" data-title="The Black Guitars — Chłopaki nie płaczą (T.Love)"></div>
+									<figcaption>Zagrali u nas: The Black Guitars — Chłopaki nie płaczą (T.Love)</figcaption>
+								</figure>
+								<figure class="yt-wrap">
+									<div class="yt" data-id="sZCLg14TSX4" data-title="Choco Smoki — Trofea (Dawid Podsiadło)"></div>
+									<figcaption>Zagrali u nas: Choco Smoki — Trofea (Dawid Podsiadło)</figcaption>
+								</figure>
+							</div>
+
+							<h3 class="video-group-title">Lekcje online — pierwsze kroki na każdym instrumencie</h3>
+							<div class="video-grid lessons-grid">
+								<figure class="yt-wrap">
+									<div class="yt" data-id="dqUGcGToAdE" data-title="Jak zacząć grać na gitarze elektrycznej? cz. 1"></div>
+									<figcaption>Jak zacząć grać na gitarze elektrycznej? cz. 1</figcaption>
+								</figure>
+								<figure class="yt-wrap">
+									<div class="yt" data-id="15iRwWNcDhY" data-title="Jak zacząć grę na gitarze basowej? cz. 1"></div>
+									<figcaption>Jak zacząć grę na gitarze basowej? cz. 1</figcaption>
+								</figure>
+								<figure class="yt-wrap">
+									<div class="yt" data-id="kxu_lUpODnY" data-title="Jak zacząć grać na perkusji? cz. 1"></div>
+									<figcaption>Jak zacząć grać na perkusji? cz. 1</figcaption>
+								</figure>
+								<figure class="yt-wrap">
+									<div class="yt" data-id="CsQMBk9EbFQ" data-title="Jak zacząć grać na gitarze akustycznej? cz. 1"></div>
+									<figcaption>Jak zacząć grać na gitarze akustycznej? cz. 1</figcaption>
+								</figure>
+								<figure class="yt-wrap">
+									<div class="yt" data-id="S1EAebKAr_A" data-title="Jak pisać piosenki? cz. 1"></div>
+									<figcaption>Jak pisać piosenki? cz. 1</figcaption>
+								</figure>
+								<figure class="yt-wrap">
+									<div class="yt" data-id="WUyb06KHM_s" data-title="Historia muzyki rockowej w pigułce! cz. 1"></div>
+									<figcaption>Historia muzyki rockowej w pigułce! cz. 1</figcaption>
+								</figure>
+							</div>
+							<p style="text-align:center; margin-top:2em;"><a href="https://www.youtube.com/@SzkoaRocka/videos" target="_blank" rel="noopener">Zobacz więcej na kanale YouTube → <span class="sr-only">(otwiera się w nowej karcie)</span></a></p>
+							<!-- DO POTWIERDZENIA z klientem: czy tych 11 filmów (powyżej) jest nadal
+							     aktualnych, czy doszły nowsze nagrania do podmiany. -->
+						</div>
+					</section>
+
+				<!-- Lokalizacje -->
+					<section id="lokalizacje" class="wrapper style2 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Gdzie gramy</h2>
+								<p>Zajęcia odbywają się na terenie szkoły, w grafiku dopasowanym do planu lekcji —<br />
+								zero dodatkowego dojazdu, łatwo dołączyć. Trzy lokalizacje w Warszawie:</p>
+							</header>
+							<ul class="location-list">
+								<li>
+									<span class="icon solid fa-map-marker-alt" aria-hidden="true"></span>
+									<h3>SP nr 373 im. I. J. Paderewskiego</h3>
+									<address>ul. Angorska 2, Warszawa</address>
+									<a href="https://www.google.com/maps/search/?api=1&amp;query=SP%20nr%20373%2C%20ul.%20Angorska%202%2C%20Warszawa" target="_blank" rel="noopener">Zobacz na mapie → <span class="sr-only">(otwiera się w nowej karcie)</span></a>
+								</li>
+								<li>
+									<span class="icon solid fa-map-marker-alt" aria-hidden="true"></span>
+									<h3>SP nr 402 im. Jana Nowaka-Jeziorańskiego</h3>
+									<address>ul. Jana Nowaka-Jeziorańskiego 22, Warszawa</address>
+									<a href="https://www.google.com/maps/search/?api=1&amp;query=SP%20nr%20402%2C%20ul.%20Jana%20Nowaka-Jezioranskiego%2022%2C%20Warszawa" target="_blank" rel="noopener">Zobacz na mapie → <span class="sr-only">(otwiera się w nowej karcie)</span></a>
+								</li>
+								<li>
+									<span class="icon solid fa-map-marker-alt" aria-hidden="true"></span>
+									<h3>SP nr 375</h3>
+									<address>ul. Abrahama 10, Warszawa</address>
+									<a href="https://www.google.com/maps/search/?api=1&amp;query=SP%20nr%20375%2C%20ul.%20Abrahama%2010%2C%20Warszawa" target="_blank" rel="noopener">Zobacz na mapie → <span class="sr-only">(otwiera się w nowej karcie)</span></a>
+								</li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- O nas / historia (spotlight) -->
+					<section id="o-nas" class="wrapper alt style2">
+						<header class="major inner">
+							<h2>Kim jesteśmy</h2>
+						</header>
+						<section class="spotlight">
+							<div class="image"><img src="images/o-nas-1.jpg" alt="Arkadiusz Krupa, założyciel Szkoły Rocka"  loading="lazy" /></div>
+							<div class="content">
+								<h3>Fundacja Promocji Kultury „Szkoła Rocka”</h3>
+								<p>Szkoła Rocka to projekt Fundacji Promocji Kultury „Szkoła Rocka”, działającej od 2011 roku. Założył ją <strong>Arkadiusz Krupa</strong> — skrzypek i multiinstrumentalista, który mimo klasycznego wykształcenia od zawsze działa w muzyce rockowej. Laureat ogólnopolskiej nagrody „Nauczyciel Muzyki 2016” za projekt Szkoły Rocka.</p>
+							</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><img src="images/o-nas-2.jpg" alt="Duża grupa uczestników Szkoły Rocka pozująca razem po koncercie (twarze dzieci zamazane dla ochrony prywatności)"  loading="lazy" /></div>
+							<div class="content">
+								<h3>Muzyka grana razem uczy więcej niż niejedna lekcja</h3>
+								<p>Wierzymy, że wspólne granie w zespole uczy współpracy, odwagi, systematyczności i wyrażania siebie. Pod „płaszczykiem” muzyki rockowej budujemy wrażliwość i pewność siebie — także u młodzieży, która czuje się na uboczu rówieśników. Projekt jest otwarty na dzieci i młodzież różnych narodowości i mniejszości narodowych, co sprzyja integracji. Zaangażowanie w żywą, wspólną twórczość to też realny sposób na odciąganie młodych ludzi od uzależnień, wyobcowania i innych zagrożeń współczesnego świata. I to działa — widzimy to na własne oczy od kilkunastu lat.</p>
+							</div>
+						</section>
+						<section class="spotlight">
+							<div class="image"><img src="images/o-nas-3.jpg" alt="Wokalistka Szkoły Rocka śpiewa przed publicznością podczas plenerowego koncertu"  loading="lazy" /></div>
+							<div class="content">
+								<h3>Absolwenci wracają jako wolontariusze</h3>
+								<p>Duża część naszych wychowanków to dziś studenci, którzy zaczynali jeszcze jako gimnazjaliści. Wielu z nich wraca do Szkoły Rocka jako wolontariusze i dzieli się wiedzą z młodszymi uczestnikami. Wokół fundacji działają też „wolni słuchacze”, pomagający np. przy oprawie plastycznej wydarzeń.</p>
+								<p>W 2016 roku młodzież Szkoły Rocka wystąpiła na koncercie galowym 60-lecia klubu „Stodoła” w Auli Politechniki Warszawskiej, grając wspólnie z zespołem Kult. Fundacja, we współpracy z Narodowym Instytutem Audiowizualnym, nagrała też i bezpłatnie udostępniła na portalu Muzykoteka Szkolna serię filmów instruktażowych gry na instrumentach.</p>
+								<p>Fundacja zrealizowała też szereg projektów dofinansowanych ze środków ministerialnych, a Szkoła Rocka została wytypowana do ogólnopolskiego projektu „Grajmy w Szkole”. Wspieramy również uzdolnioną muzycznie młodzież w jej indywidualnym rozwoju artystycznym.</p>
+							</div>
+						</section>
+						<!-- DO POTWIERDZENIA z fundacją: czy plany z wniosku grantowego 2019 r.
+						     (lokal ~450 m² na Pradze Płd. z salą koncertową na 100 osób, 4–5 sal prób
+						     im. zespołów Kult/T.Love/Oddział Zamknięty, pracownia DAW, pracownia
+						     techniki scenicznej, studio nagrań, pracownia kostiumów) zostały
+						     zrealizowane w jakiejkolwiek formie? To plany sprzed 7 lat — jeśli tak,
+						     warto zrobić o tym osobną sekcję po weryfikacji, to duży atut. -->
+					</section>
+
+				<!-- FAQ -->
+					<section id="faq" class="wrapper style3 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Najczęstsze pytania</h2>
+							</header>
+							<div class="faq-list">
+								<details>
+									<summary>Dla kogo są zajęcia?</summary>
+									<p>Dla dzieci w wieku szkolnym i starszej młodzieży. Przyjmujemy zarówno początkujących, jak i osoby już grające lub śpiewające — spora część naszych wychowanków to dziś studenci, którzy zaczynali jeszcze jako gimnazjaliści.</p>
+								</details>
+								<details>
+									<summary>Nie umiem grać — mogę dołączyć?</summary>
+									<p>Tak! Większość naszych uczestników zaczynała od zera. Instrument wybierasz na miejscu i uczysz się od pierwszych zajęć — w zespole.</p>
+								</details>
+								<details>
+									<summary>Ile kosztują zajęcia?</summary>
+									<p>Szkoła Rocka to fundacja, nie prywatna szkoła — udział w zajęciach jest darowizną na cele statutowe. Dla młodszych uczestników to 180 zł/mc (1 godzina tygodniowo), dla starszych 250 zł/mc (2 godziny tygodniowo plus dodatkowe warsztaty na wybranym instrumencie).</p>
+								</details>
+								<details>
+									<summary>Czy mogę dołączyć w trakcie roku szkolnego?</summary>
+									<p>Tak. Nowe zajęcia startują co roku 1 września, ale nabór trwa cały rok i dołączenie w trakcie roku jest możliwe.</p>
+								</details>
+								<details>
+									<summary>Gdzie odbywają się zajęcia?</summary>
+									<p>W trzech lokalizacjach w Warszawie: SP nr 373 (ul. Angorska 2), SP nr 402 (ul. Jana Nowaka-Jeziorańskiego 22) i SP nr 375 (ul. Abrahama 10) — na terenie szkoły, w grafiku dopasowanym do planu lekcji. Szczegóły w sekcji Lokalizacje powyżej.</p>
+								</details>
+								<details>
+									<summary>Czy muszę mieć własny instrument?</summary>
+									<p>Nie musisz. Na miejscu mamy własny sprzęt: gitary elektryczne, akustyczne i basowe, ukulele, dwa zestawy perkusyjne, instrumenty klawiszowe, wzmacniacze i mikrofony — zobacz zdjęcia w sekcji Sale prób powyżej. Jeśli masz już swój instrument, oczywiście możesz go przynosić.</p>
+								</details>
+								<details>
+									<summary>Jak wyglądają zapisy?</summary>
+									<p>Wypełnij formularz poniżej, napisz na fundacja@szkolarocka.pl albo zadzwoń pod +48&nbsp;694&nbsp;559&nbsp;479 — oddzwonimy i dopasujemy Cię do zespołu.</p>
+								</details>
+							</div>
+						</div>
+					</section>
+
+				<!-- Zapisy / formularz kontaktowy -->
+					<section id="zapisy" class="wrapper style5 special">
+						<div class="inner">
+							<header class="major">
+								<h2>Dołącz do Szkoły Rocka</h2>
+								<p>Wypełnij zgłoszenie — oddzwonimy i dopasujemy Cię do zespołu.</p>
+							</header>
+
+							<div class="signup-grid">
+								<div>
+									<!-- FORMULARZ ZAPISÓW — podpięty pod Formspree (2026-09-01), endpoint
+									     dostarczony przez klienta, ustawiony na fundacja@szkolarocka.pl.
+									     Wysyłka idzie przez fetch() w assets/js/site.js (funkcja obsługi
+									     #signup-form), żeby po submicie zostać na stronie i pokazać komunikat
+									     zamiast przekierowywać na generyczną stronę Formspree. -->
+									<form id="signup-form" action="https://formspree.io/f/mbgjgnjw" method="POST">
+										<input type="hidden" name="_subject" value="Zapis do Szkoły Rocka" />
+										<div class="row gtr-uniform">
+											<div class="col-12">
+												<label for="f-name">Imię i nazwisko uczestnika</label>
+												<input id="f-name" name="name" type="text" required autocomplete="name" />
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<label for="f-age">Wiek</label>
+												<input id="f-age" name="age" type="number" min="5" max="99" required />
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<label for="f-instrument">Instrument</label>
+												<select id="f-instrument" name="instrument" required>
+													<option value="" selected disabled>Wybierz…</option>
+													<option>Wokal</option>
+													<option>Gitara elektryczna</option>
+													<option>Gitara basowa</option>
+													<option>Perkusja</option>
+													<option>Klawisze</option>
+													<option>Jeszcze nie wiem</option>
+												</select>
+											</div>
+											<div class="col-12">
+												<label for="f-contact">Telefon lub e-mail do rodzica/opiekuna</label>
+												<input id="f-contact" name="contact" type="text" required />
+											</div>
+											<div class="col-12">
+												<input id="f-rodo" name="rodo" type="checkbox" required />
+												<label for="f-rodo">Wyrażam zgodę na przetwarzanie danych osobowych podanych w formularzu w celu obsługi zgłoszenia do Fundacji Szkoła Rocka, zgodnie z <a href="polityka-prywatnosci.html" target="_blank" rel="noopener">polityką prywatności <span class="sr-only">(otwiera się w nowej karcie)</span></a>.</label>
+												<!-- Polityka prywatności: WERSJA ROBOCZA (docs/polityka-prywatnosci.html),
+												     dodana 2026-09-02. Ma 2 miejsca oznaczone [DO POTWIERDZENIA]
+												     (okres przechowywania danych, czy jest IOD) — uzupełnij je
+												     prawdziwymi faktami przed pełną publikacją, najlepiej po
+												     konsultacji z kimś odpowiedzialnym za RODO w fundacji. -->
+											</div>
+											<div class="col-12">
+												<ul class="actions">
+													<li><input type="submit" value="Wyślij zgłoszenie" class="primary" /></li>
+												</ul>
+												<p class="form-note" role="status"></p>
+											</div>
+										</div>
+									</form>
+								</div>
+
+								<aside class="signup-aside">
+									<h3>Kontakt</h3>
+									<p><a href="mailto:fundacja@szkolarocka.pl">fundacja@szkolarocka.pl</a><br />
+									<a href="mailto:biuro@szkolarocka.pl">biuro@szkolarocka.pl</a></p>
+									<p><a href="tel:+48694559479">+48&nbsp;694&nbsp;559&nbsp;479</a></p>
+
+									<h3>Lokalizacje</h3>
+									<p>SP nr 373, ul. Angorska 2<br />
+									SP nr 402, ul. Jana Nowaka-Jeziorańskiego 22<br />
+									SP nr 375, ul. Abrahama 10</p>
+
+									<h3>Social media</h3>
+									<p><a href="https://facebook.com/szkolarocka.waw" target="_blank" rel="noopener">Facebook <span class="sr-only">(otwiera się w nowej karcie)</span></a><br />
+									<a href="https://www.instagram.com/szkolarocka/" target="_blank" rel="noopener">Instagram <span class="sr-only">(otwiera się w nowej karcie)</span></a><br />
+									<a href="https://youtube.com/@SzkoaRocka" target="_blank" rel="noopener">YouTube <span class="sr-only">(otwiera się w nowej karcie)</span></a></p>
+								</aside>
+							</div>
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="https://facebook.com/szkolarocka.waw" class="icon brands fa-facebook-f" target="_blank" rel="noopener" aria-label="Facebook (otwiera się w nowej karcie)"><span class="label">Facebook</span></a></li>
+							<li><a href="https://www.instagram.com/szkolarocka/" class="icon brands fa-instagram" target="_blank" rel="noopener" aria-label="Instagram (otwiera się w nowej karcie)"><span class="label">Instagram</span></a></li>
+							<li><a href="https://youtube.com/@SzkoaRocka" class="icon brands fa-youtube" target="_blank" rel="noopener" aria-label="YouTube (otwiera się w nowej karcie)"><span class="label">YouTube</span></a></li>
+							<li><a href="mailto:fundacja@szkolarocka.pl" class="icon solid fa-envelope" aria-label="Email"><span class="label">Email</span></a></li>
+						</ul>
+						<img src="images/logo.png" alt="Szkoła Rocka" class="footer-logo" style="display:block; margin: 0 auto 1em; height: 4em; width: auto;"  loading="lazy" />
+						<p class="copyright" style="text-align:center; opacity:.6; font-size:.8em; letter-spacing:.05em; margin: 1em 0;">
+							Fundacja Promocji Kultury „Szkoła Rocka” · KRS 0000599376 · NIP 9522142850 · REGON 363662599<br />
+							ul. Mydlarska 15A lok. 25, 04-690 Warszawa
+						</p>
+						<ul class="copyright">
+							<li>&copy; 2026 Szkoła Rocka</li>
+							<li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
+							<li>Projekt i realizacja: <a href="https://stagedive.pl" target="_blank" rel="noopener">Stage Dive Media <span class="sr-only">(otwiera się w nowej karcie)</span></a> | <a href="https://widacwas.pl" target="_blank" rel="noopener">WidacWas.pl <span class="sr-only">(otwiera się w nowej karcie)</span></a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/site.js"></script>
+
+	</body>
+</html>

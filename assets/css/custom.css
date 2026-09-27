@@ -1,0 +1,688 @@
+/*
+	Szkoła Rocka — dodatki na bazie Spectral (HTML5 UP)
+	Wyłącznie layout dla sekcji, których Spectral nie ma domyślnie (galeria,
+	kadra, FAQ, lokalizacje, formularz). ZERO własnej palety kolorów,
+	fontów ani ozdobników (marquee, numeracja sekcji) — to wszystko zostało
+	usunięte, bo psuło spójność z oryginalnym szablonem Spectral. Kolory
+	akcentu poniżej to dokładnie accent1 (#21b2a6) i biel/czerń z domyślnej
+	palety Spectral (assets/sass/libs/_vars.scss), nie własna marka.
+*/
+
+/* ---------- Dostępność (a11y) — audyt 2026-09-02 ---------- */
+
+/* Standardowa klasa "tylko dla czytników ekranu": tekst jest w DOM-ie i
+   dostępny asystentom, ale wizualnie niewidoczny — używana do zapowiedzi
+   "otwiera się w nowej karcie" przy linkach target="_blank", bez zmiany
+   wyglądu tych linków. */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Widoczny focus dla nawigacji klawiaturą. Spectral w kilku miejscach robi
+   outline:0 na linkach/przyciskach (menu, "Zobacz więcej", strzałka scrolla)
+   bez własnej alternatywy — dla klawiatury fokus był całkowicie niewidoczny.
+   :focus-visible pokazuje obrys tylko przy nawigacji klawiaturą, nie przy
+   kliknięciu myszką. !important świadomie, żeby wygrać z tamtymi regułami
+   niezależnie od ich specyficzności (to jedyne inne miejsce w projekcie,
+   oprócz &display=swap w main.css, gdzie świadomie obchodzimy oryginalny
+   Spectral — tu przez nadpisanie z custom.css, nie edycję main.css). */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+	outline: 2px solid #21b2a6 !important;
+	outline-offset: 2px !important;
+}
+
+/* ---------- Zdjęcia w sekcjach spotlight (Jak to działa, Kim jesteśmy) ---------- */
+/* Domyślnie Spectral rozciąga zdjęcie na 100% szerokości/wysokości swojej
+   połówki, bez zaokrągleń — przy zdjęciach z bardzo różnych źródeł (telefon,
+   scena, plener) wygląda to jak przypadkowo wklejone kafelki. Dodajemy
+   odstęp od krawędzi + zaokrąglenie + cień, żeby każde zdjęcie wyglądało
+   jak świadomie oprawiona fotografia, a nie surowy prostokąt. */
+
+.spotlight .image {
+	padding: 2.5em;
+	box-sizing: border-box;
+	background: transparent;
+}
+
+.spotlight .image img {
+	border-radius: 14px;
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+	display: block;
+}
+
+@media screen and (max-width: 980px) {
+	.spotlight .image {
+		padding: 1.5em 1.5em 0;
+	}
+}
+
+/* ---------- Nagłówek / wordmark ---------- */
+
+/* Podmiana na obrazek: zastąp zawartość <a> przez
+   <img src="images/logo.svg" alt="Szkoła Rocka" class="site-logo"> —
+   poniższa reguła utrzyma wysokość nagłówka bez przebudowy layoutu. */
+#header h1 a img.site-logo {
+	display: block;
+	height: 1.6em;
+	width: auto;
+}
+
+/* Spectral domyślnie chowa logo w nagłówku (opacity: 0), dopóki jesteś na
+   hero — pokazuje je dopiero po przewinięciu. Klient chciał logo widoczne
+   już na hero (z boku, w lewym górnym rogu), więc trzymamy je widoczne
+   przez cały czas, także na wersji "alt" (czyli na tle hero). */
+#header.alt h1 {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* ---------- Hero ---------- */
+
+#banner .inner {
+	max-width: 46em;
+	margin: 0 auto;
+}
+
+/* Mała etykieta nad głównym nagłówkiem hero — pokazuje od razu, że to
+   fundacja (klient prosił, żeby to było widoczne "na pierwszy rzut oka"),
+   bez konkurowania wizualnie z głównym nagłówkiem. */
+#banner .hero-kicker {
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-size: 0.8em;
+	opacity: 0.65;
+	margin: 0 0 0.75em;
+}
+
+#banner > .inner > p.lead {
+	max-width: 46ch;
+	margin: 1.5em auto 0;
+	line-height: 1.7;
+	opacity: 0.85;
+}
+
+#banner .inner > ul.actions.special {
+	margin-top: 2.25em;
+}
+
+#banner .badge-line {
+	margin-top: 2.25em;
+	font-size: 0.85em;
+	opacity: 0.6;
+}
+
+/* ---------- QR w hero ---------- */
+/* Duży, dobrze widoczny kod QR — to główne wezwanie do zapisu na stronie,
+   nie dodatek, więc jest większy niż typowy "mały QR w rogu". */
+
+.hero-qr {
+	margin: 2.5em auto 0;
+	display: inline-flex;
+	align-items: center;
+	gap: 1.5em;
+	text-align: left;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	padding: 1.25em 1.75em;
+}
+
+.hero-qr img {
+	width: 200px;
+	height: 200px;
+	display: block;
+	background: #fff;
+	padding: 10px;
+	flex-shrink: 0;
+}
+
+@media screen and (max-width: 480px) {
+	.hero-qr img {
+		width: 160px;
+		height: 160px;
+	}
+}
+
+.hero-qr .hero-qr__text {
+	font-size: 0.95em;
+	line-height: 1.5;
+}
+
+.hero-qr .hero-qr__text strong {
+	display: block;
+	font-size: 1.1em;
+	margin-bottom: 0.3em;
+}
+
+.hero-qr .hero-qr__text a {
+	color: inherit;
+}
+
+@media screen and (max-width: 480px) {
+	.hero-qr {
+		flex-direction: column;
+		text-align: center;
+	}
+}
+
+/* ---------- Statystyki (#one, wrapper.style1) ---------- */
+
+.stat-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2.5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.stat-list li {
+	text-align: center;
+	max-width: 14em;
+}
+
+.stat-list .stat-number {
+	display: block;
+	font-size: 1.1em;
+	font-weight: 700;
+	margin-top: 0.6em;
+}
+
+/* ---------- Galeria koncertowa ---------- */
+
+.gallery-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1em;
+}
+
+.gallery-grid img {
+	display: block;
+	width: 100%;
+	height: 18em;
+	object-fit: cover;
+	border-radius: 10px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+@media screen and (max-width: 736px) {
+	.gallery-grid {
+		grid-template-columns: 1fr;
+	}
+	.gallery-grid img {
+		height: 14em;
+	}
+}
+
+/* Lite-embed YouTube (facade) */
+
+.yt-wrap {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	background: #000;
+	margin-bottom: 1.5em;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.yt-wrap figcaption {
+	font-size: 0.8em;
+	opacity: 0.7;
+	margin-top: 0.6em;
+	text-align: center;
+}
+
+.yt-face {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	background: #000;
+}
+
+.yt-face img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	opacity: 0.75;
+}
+
+.yt-face .play {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0.9em 0 0.9em 1.5em;
+	border-color: transparent transparent transparent #21b2a6;
+}
+
+.yt-wrap iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.video-group-title {
+	text-align: center;
+	margin: 3em 0 1.5em;
+	font-size: 1.1em;
+	opacity: 0.75;
+}
+
+.video-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2em;
+	margin-top: 2.5em;
+}
+
+.video-grid.lessons-grid {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 980px) {
+	.video-grid.lessons-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (max-width: 736px) {
+	.video-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ---------- Polecają nas (embedy Facebook, format rolek 9:16) ---------- */
+
+.recommend-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2.5em;
+	margin-top: 2.5em;
+	max-width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.fb-card {
+	margin: 0;
+}
+
+/* Imię i nazwisko NAD filmem, duże i wyraźne — nie podpis pod spodem. */
+.fb-card__name {
+	text-align: center;
+	font-size: 1.15em;
+	margin-bottom: 0.75em;
+}
+
+.fb-card__name span {
+	display: block;
+	font-size: 0.65em;
+	opacity: 0.65;
+	margin-top: 0.15em;
+}
+
+.fb-wrap {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 9 / 16;
+	background: #000;
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.fb-wrap iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.fb-face {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	background: #000;
+}
+
+.fb-face img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	opacity: 0.75;
+}
+
+.fb-face .play {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 4em;
+	height: 4em;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.55);
+	border: 2px solid #21b2a6;
+}
+
+.fb-face .play::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 54%;
+	transform: translate(-50%, -50%);
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0.7em 0 0.7em 1.2em;
+	border-color: transparent transparent transparent #ffffff;
+}
+
+/* Zawsze widoczna, zapasowa ścieżka na wypadek gdyby embed się nie załadował. */
+.fb-card__out {
+	display: block;
+	text-align: center;
+	font-size: 0.8em;
+	opacity: 0.7;
+	margin-top: 0.6em;
+}
+
+@media screen and (max-width: 980px) {
+	.recommend-grid {
+		grid-template-columns: repeat(2, 1fr);
+		max-width: none;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	.recommend-grid {
+		grid-template-columns: 1fr;
+		max-width: 320px;
+	}
+}
+
+/* ---------- Lokalizacje ---------- */
+
+.location-list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.location-list li {
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	padding-top: 1.5em;
+}
+
+.location-list .icon {
+	color: #21b2a6;
+	font-size: 1.4em;
+	margin-bottom: 0.4em;
+	display: inline-block;
+}
+
+.location-list h3 {
+	margin-bottom: 0.3em;
+}
+
+.location-list address {
+	font-style: normal;
+	opacity: 0.75;
+	margin-bottom: 0.6em;
+}
+
+@media screen and (max-width: 736px) {
+	.location-list {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ---------- Kadra ---------- */
+/* Duże, wyeksponowane zdjęcia — kadra to jedna z pierwszych rzeczy, jakie
+   widać po hero, więc portrety mają być dużym akcentem, nie małymi ikonkami. */
+
+.crew-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 3em 2.5em;
+	max-width: 68em;
+	margin: 0 auto;
+}
+
+/* Piąta karta (Szymon) zostaje sama w drugim rzędzie przy 3 kolumnach —
+   wyśrodkowujemy ją zamiast zostawiać przyklejoną do lewej. */
+.crew-grid > .crew-card:last-child:nth-child(3n + 1) {
+	grid-column: 2;
+}
+
+.crew-card {
+	text-align: center;
+}
+
+.crew-avatar {
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	background: rgba(255, 255, 255, 0.06);
+	border-radius: 14px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2.4em;
+	font-weight: 700;
+	color: #21b2a6;
+	margin-bottom: 1.1em;
+	border: 3px solid rgba(33, 178, 166, 0.5);
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+	transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.crew-card:hover .crew-avatar {
+	border-color: #21b2a6;
+	transform: translateY(-4px);
+}
+
+.crew-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.crew-card h3 {
+	font-size: 1.3em;
+	margin-bottom: 0.3em;
+}
+
+.crew-card p {
+	font-size: 0.95em;
+	opacity: 0.7;
+}
+
+@media screen and (max-width: 980px) {
+	.crew-grid {
+		grid-template-columns: repeat(2, 1fr);
+		max-width: 40em;
+	}
+	.crew-grid > .crew-card:last-child:nth-child(3n + 1) {
+		grid-column: auto;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.crew-grid {
+		grid-template-columns: 1fr;
+		max-width: 20em;
+	}
+}
+
+/* ---------- FAQ ---------- */
+
+.faq-list {
+	max-width: 46em;
+	margin: 0 auto;
+}
+
+.faq-list details {
+	border-top: 1px solid rgba(255, 255, 255, 0.15);
+	padding: 1.25em 0;
+}
+
+.faq-list details:last-child {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.faq-list summary {
+	cursor: pointer;
+	font-weight: 700;
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1em;
+}
+
+.faq-list summary::-webkit-details-marker {
+	display: none;
+}
+
+.faq-list summary::after {
+	content: '+';
+	font-size: 1.4em;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.faq-list details[open] summary::after {
+	content: '\2212';
+}
+
+.faq-list p {
+	margin-top: 0.9em;
+	opacity: 0.8;
+	line-height: 1.6;
+}
+
+/* ---------- Formularz zapisów ---------- */
+
+/* Spectral (main.css) stylizuje tylko input[type=text/password/email] +
+   select/textarea — pole "Wiek" jest type=number, więc zostawało bez tego
+   stylu: białe tło przeglądarki + wymuszony globalnie biały tekst (main.css
+   `body, input, select, textarea { color:#fff }`) = niewidoczna wpisana
+   liczba. Dogrywamy identyczny wygląd co reszta pól. */
+input[type="number"] {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: rgba(144, 144, 144, 0.25);
+	border-radius: 3px;
+	border: none;
+	color: inherit;
+	display: block;
+	outline: 0;
+	padding: 0 1em;
+	text-decoration: none;
+	width: 100%;
+	height: 2.75em;
+}
+
+input[type="number"]:focus {
+	box-shadow: 0 0 0 2px #21b2a6;
+}
+
+/* Pole "Wiek" żyje wyłącznie w sekcji Zapisy (wrapper.style5, jasne tło) —
+   dopasuj tło do tego samego, bardzo subtelnego zaciemnienia co sąsiednie
+   pola tekstowe w tej sekcji (main.css: .wrapper.style5 input[type=text]
+   itd. = rgba(0,0,0,.0375)), zamiast ciemnoszarego tła zrobionego dla
+   wariantu ciemnego. */
+.wrapper.style5 input[type="number"] {
+	background-color: rgba(0, 0, 0, 0.0375);
+}
+
+.signup-grid {
+	display: grid;
+	grid-template-columns: 1.3fr 1fr;
+	gap: 3em;
+}
+
+.signup-aside {
+	border-left: 1px solid rgba(255, 255, 255, 0.15);
+	padding-left: 2em;
+}
+
+.signup-aside h3 {
+	font-size: 1em;
+	margin: 1.4em 0 0.4em;
+}
+
+.signup-aside h3:first-child {
+	margin-top: 0;
+}
+
+.signup-aside p,
+.signup-aside a {
+	opacity: 0.85;
+}
+
+.form-note {
+	margin-top: 1.5em;
+	font-size: 0.85em;
+	padding: 1em 1.25em;
+	display: none;
+}
+
+/* Sekcja Zapisy (wrapper.style5) ma jasne tło — obramowanie/tło na bazie
+   białej poświaty (rgba(255,255,255,...)) było na niej praktycznie
+   niewidoczne. Dopasuj do tego samego, subtelnego przyciemnienia co inne
+   elementy w tej sekcji (main.css: .wrapper.style5 input... = rgba(0,0,0,.0375)). */
+.wrapper.style5 .form-note {
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	background: rgba(0, 0, 0, 0.0375);
+}
+
+.form-note.is-visible {
+	display: block;
+}
+
+@media screen and (max-width: 736px) {
+	.signup-grid {
+		grid-template-columns: 1fr;
+	}
+	.signup-aside {
+		border-left: 0;
+		padding-left: 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.15);
+		padding-top: 2em;
+	}
+}
